@@ -5,31 +5,39 @@ const app = express();
 
 const port = 3001
 
-const carrosPath = path.join(__dirname, 'carros.json')
-const carrosData = fs.readFileSync(carrosPath, 'utf-8')
+const carrosPath = path.join(__dirname, 'carros.json');
+const carrosData = fs.readFileSync(carrosPath, 'utf-8');
 const carros = JSON.parse(carrosData);
 
-function criarCard(carro) {
-    return `
-    <div class="card mb-3">
-        <img src="${carro.url_foto}" class="card-img-top w-100 h-auto" alt="${carro.nome}">
-        <div class="card-body">
-            <h5 class="card-title">${carro.nome}</h5>
-            <p class="card-text">${carro.desc}</p>
-            <a href="${carro.url_info}" class="btn btn-primary"> Mais Informações</a>
-            </div>
-        </div>
-        `;
+function truncarDescricao(descricao, comprimentoMaximo) {
+    if (descricao.length > comprimentoMaximo) {
+        return descricao.slice(0, comprimentoMaximo) + "...";
+    }
+    return descricao
 }
 
 app.get('/', (req, res) => {
-    const cardsHtml = carros.map(carro => criarCard(carro)).join('');
-    const pageHtmlPath = path.join(__dirname, 'dadoscarro.html');
-    let pageHtml = fs.readFileSync(pageHtmlPath, 'utf-8')
-    pageHtml = pageHtml.replace('{{cardsHtml}}', cardsHtml);
-    res.send(pageHtml);
+    let carsTable = ''; 
+
+    carros.forEach(carro => {
+
+        const descricaoTruncada = truncarDescricao(carro.desc, 100);
+
+        carsTable += `
+        <tr>
+            <td><a href="${carro.url_info}">${carro.nome}</a></td>
+            <td>${descricaoTruncada}</td>
+            <td><img src="${carro.url_foto}" alt="${carro.nome}" style="max-width: 100px;"></td>
+        </tr>
+        `;
+    });
+
+    const htmlContent = fs.readFileSync('dadoscarro.html', 'utf-8');
+    const finalHtml  = htmlContent.replace('{{carsTable}}', carsTable);
+
+    res.send(finalHtml);
 });
 
-app.listen(port, () => {
-    console.log(`Servidor iniciado em http://localhost:${port}`);
-});
+app.listen(port, () =>{
+    console.log(`Servidor iniciado em: http://localhost:${port}`)
+})
