@@ -1,0 +1,59 @@
+[
+	{
+	  "ano": 1994,
+	  "genero": "Drama",
+	  "titulo": "Forrest Gump",
+	  "diretor": "Robert Zemeckis",
+	  "imagem_url": "https://example.com/forrest_gump.jpg"
+	},
+	{
+	  "ano": 1972,
+	  "genero": "Drama",
+	  "titulo": "The Godfather",
+	  "diretor": "Francis Ford Coppola",
+	  "imagem_url": "https://example.com/the_godfather.jpg"
+	},
+	{
+	  "ano": 2008,
+	  "genero": "Ação",
+	  "titulo": "The Dark Knight",
+	  "diretor": "Christopher Nolan",
+	  "imagem_url": "https://example.com/the_dark_knight.jpg"
+	},
+	{
+	  "ano": 1999,
+	  "genero": "Ficção Científica",
+	  "titulo": "The Matrix",
+	  "diretor": "Lana Wachowski, Lilly Wachowski",
+	  "imagem_url": "https://example.com/the_matrix.jpg"
+	},
+	{
+	  "ano": 2010,
+	  "genero": "Aventura",
+	  "titulo": "Inception",
+	  "diretor": "Christopher Nolan",
+	  "imagem_url": "https://example.com/inception.jpg"
+	},
+	{
+	  "ano": 1994,
+	  "genero": "Drama",
+	  "titulo": "Pulp Fiction",
+	  "diretor": "Quentin Tarantino",
+	  "imagem_url": "https://example.com/pulp_fiction.jpg"
+	},
+	{
+	  "ano": 1977,
+	  "genero": "Aventura",
+	  "titulo": "Star Wars: Episode IV - A New Hope",
+	  "diretor": "George Lucas",
+	  "imagem_url": "https://example.com/star_wars_anh.jpg"
+	},
+	{
+	  "ano": 1985,
+	  "genero": "Ficção Científica",
+	  "titulo": "Back to the Future",
+	  "diretor": "Robert Zemeckis",
+	  "imagem_url": "https://example.com/back_to_the_future.jpg"
+	}
+  ]
+  

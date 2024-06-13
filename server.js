@@ -5,35 +5,40 @@ const app = express();
 
 const port = 3001
 
-const carrosPath = path.join(__dirname, 'carros.json');
-const carrosData = fs.readFileSync(carrosPath, 'utf-8');
-const carros = JSON.parse(carrosData);
+const filmesPath = path.join(__dirname, 'filmes.json');
+const filmesData = fs.readFileSync(filmesPath, 'utf-8');
+const filmes = JSON.parse(filmesData);
 
-function truncarDescricao(descricao, comprimentoMaximo) {
-    if (descricao.length > comprimentoMaximo) {
-        return descricao.slice(0, comprimentoMaximo) + "...";
-    }
-    return descricao
+
+function buscarFilme(genero) {
+    return filmes.find(filme => filme.genero.toLowerCase() === genero.toLowerCase())
 }
 
 app.get('/', (req, res) => {
-    let carsTable = ''; 
+    const GeneroFilme = req.query.genero
+    const FilmeEncontrado = buscarFilme(GeneroFilme);
+    var lista = `${JSON.stringify(FilmeEncontrado, null, 2)}`
 
-    carros.forEach(carro => {
 
-        const descricaoTruncada = truncarDescricao(carro.desc, 100);
+    let filmTable = ''; 
 
-        carsTable += `
+    filmes.forEach(filme => {
+
+
+
+        filmTable += `
         <tr>
-            <td><a href="${carro.url_info}">${carro.nome}</a></td>
-            <td>${descricaoTruncada}</td>
-            <td><img src="${carro.url_foto}" alt="${carro.nome}" style="max-width: 100px;"></td>
+            <td>${filme.titulo}</td>
+            <td>${filme.ano}</td>
+            <td>${filme.diretor}</td>
+            <td>${filme.genero}</td>
+            <td><img src="${filme.cartaz}" alt="${filme.titulo}" style="max-width: 100px;"></td>
         </tr>
         `;
     });
 
-    const htmlContent = fs.readFileSync('dadoscarro.html', 'utf-8');
-    const finalHtml  = htmlContent.replace('{{carsTable}}', carsTable);
+    const htmlContent = fs.readFileSync('dadosfilme.html', 'utf-8');
+    const finalHtml  = htmlContent.replace('{{filmTable}}', filmTable);
 
     res.send(finalHtml);
 });
